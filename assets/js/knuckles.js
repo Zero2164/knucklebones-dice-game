@@ -15,6 +15,15 @@ const turnPlayer = document.getElementById("turnPlayer");
 const currentDie = document.getElementById("currentDie");
 const endTurnBtn = document.getElementById("endTurnBtn");
 const startScreen = document.getElementById("startScreen");
+const startbtn = document.getElementById("startGame");
+const startMenuAudio = new Audio("assets/audio/startscreen.mp3");
+startMenuAudio.loop = true;
+startMenuAudio.volume = 0.1;
+const placeSound = new Audio("assets/audio/click.mp3");
+const rollSound = new Audio("assets/audio/dice.mp3");
+const knockoutSound = new Audio("assets/audio/knockout.mp3");
+
+
 
 const diceFaces = [
     `<svg fill="#ccb87cf4" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 25 25" xml:space="preserve"><path d="M20.98 5.823a1.86 1.86 0 0 0-1.803-1.816v-.003H5.823v.002a1.86 1.86 0 0 0-1.817 1.817h-.002v13.354h.002a1.86 1.86 0 0 0 1.817 1.817v.002h13.354v-.002a1.86 1.86 0 0 0 1.817-1.817h.002V5.823zm-8.48 8.582a1.905 1.905 0 1 1 0-3.81 1.905 1.905 0 0 1 0 3.81"/></svg>`,
@@ -54,6 +63,31 @@ for (let p = 0; p < 2; p++) {
     }
 }
 
+function playAudio(vol, audio) {
+    // Clone audio so overlapping placements can play simultaneously
+    const sound = audio.cloneNode();
+    sound.volume = vol || 0.2; // full volume for clarity
+    sound.play();
+}
+
+
+function fadeOutAndStop(audio, duration = 1000) {
+    const steps = 25;
+    const stepTime = duration / steps;
+    const volumeStep = audio.volume / steps;
+
+    const fade = setInterval(() => {
+        if (audio.volume - volumeStep > 0) {
+            audio.volume -= volumeStep;
+        } else {
+            audio.volume = 0;
+            audio.pause();
+            audio.currentTime = 0;
+            clearInterval(fade);
+        }
+    }, stepTime);
+}
+
 function startGame() {
     const p1 = document.getElementById("p1Name").value.trim();
     const p2 = document.getElementById("p2Name").value.trim();
@@ -76,6 +110,7 @@ function startGame() {
     playerNames[1] = p2;
     startScreen.classList.add("hidden");
     document.getElementById("boards").style.display = "flex";
+    fadeOutAndStop(startMenuAudio, 1500);
     updateHeroes();
     startTurn();
 }
@@ -95,8 +130,9 @@ function startTurn() {
 overlay.addEventListener("click", () => {
     if (rolledValue === 0 && !isRolling) {
         isRolling = true; // Block further clicks until next overlay
-        dieEl.style.animation = "roll 0.6s linear infinite";
+        dieEl.style.animation = "roll 0.3s linear infinite";
         rollPrompt.style.display = "none";
+        playAudio(0.5, rollSound);
         setTimeout(() => {
             dieEl.style.animation = "none";
             rolledValue = Math.floor(Math.random() * 6) + 1;
@@ -107,9 +143,15 @@ overlay.addEventListener("click", () => {
                 showTurnIndicator();
                 isRolling = false; // Re-enable clicks for next turn
             }, 700);
-        }, 2000);
+        }, 1000);
     }
 });
+
+startbtn.addEventListener("click", () => {
+    playAudio(1, placeSound);
+});
+
+
 
 function showTurnIndicator() {
     turnIndicator.style.display = "flex";
@@ -150,6 +192,7 @@ function handleCellClick(boardIndex, cellIndex) {
             cell.classList.add("occupied");
             cell.classList.add("drop");
             setTimeout(() => {
+                playAudio(0.5, placeSound);
                 cell.classList.remove("drop")
                 endTurnBtn.style.display = "block";
             }, 600);
@@ -174,7 +217,7 @@ endTurnBtn.addEventListener("click", () => {
         endTurnBtn.style.display = "none";
         setTimeout(() => {
             startTurn();
-        }, 550);
+        }, 1000);
     }
 });
 
@@ -192,11 +235,12 @@ function applyKnockout() {
     removed.forEach((rIdx, idx) => {
         const cell = boardEls[opp].children[rIdx];
         cell.classList.add('pop');
+
         setTimeout(() => {
             oppBoard[rIdx] = null;
             cell.innerHTML = "";
             cell.classList.remove('occupied', 'pop');
-
+            playAudio(0.5, knockoutSound);
             // Apply gravity: fall dice above into empty space
             for (let r = rIdx - 3; r >= 0; r -= 3) {
                 if (oppBoard[r] !== null) {
@@ -282,23 +326,60 @@ function isBoardFull(b) {
     return b.every(c => c !== null);
 }
 
-function getWinnerText() {
+function setDancingText(containerId, text) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = ""; // clear existing
+    [...text].forEach((char, i) => {
+        const span = document.createElement("span");
+        span.textContent = char;
+        span.style.animationDelay = `${i * 0.1}s`;
+        container.appendChild(span);
+    });
+}
+
+function getWinner() {
     return scores[0] > scores[1]
-        ? `${playerNames[0]} Wins!`
+        ? playerNames[0]
         : scores[1] > scores[0]
-            ? `${playerNames[1]} Wins!`
-            : "It's a tie!";
+            ? playerNames[1]
+            : "";
 }
 
 function showEndScreen() {
     overlay.innerHTML = `
     <div class="overlay-content">
-    <h1>Game Over!</h1>
-    <p>${playerNames[0]}: ${scores[0]}</p>
-    <p>${playerNames[1]}: ${scores[1]}</p>
-    <h2>${getWinnerText()}</h2>
-    <button class="Btn" onclick="window.location.reload()">Play Again <svg class="svg-replay" width="20" height="20" viewBox="0 0 0.6 0.6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M.125.325A.175.175 0 1 0 .3.15H.175m0 0L.25.075M.175.15.25.225" stroke="currentColor" stroke-width=".05" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <h1>Game Over!</h1>
+        <p>${playerNames[0]}: ${scores[0]}</p>
+        <p>${playerNames[1]}: ${scores[1]}</p>
+        <div id="winnerName"></div>
+        <div id="winnerWord"></div>
+        <button class="Btn" onclick="window.location.reload()">
+            Play Again
+            <svg class="svg-replay" width="20" height="20" viewBox="0 0 0.6 0.6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M.125.325A.175.175 0 1 0 .3.15H.175m0 0L.25.075M.175.15.25.225" stroke="currentColor" stroke-width=".05" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
     </div>`;
 
     overlay.style.display = "flex";
+
+    const winner = getWinner();
+    setDancingText("winnerName", winner);
+    setDancingText("winnerWord", winner ? "Wins!" : "It's a tie!");
 }
+
+
+window.addEventListener("load", () => {
+    const loadingScreen = document.getElementById("loadingScreen");
+    loadingScreen.style.transition = "opacity 0.5s ease";
+    loadingScreen.style.opacity = 0;
+
+    setTimeout(() => {
+        loadingScreen.style.display = "none";
+
+    }, 500); // match the fade duration
+
+    startMenuAudio.play().catch(e => {
+        console.log("Audio playback prevented by browser until user interaction:", e);
+    });
+});
