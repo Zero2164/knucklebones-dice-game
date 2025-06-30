@@ -64,9 +64,8 @@ for (let p = 0; p < 2; p++) {
 }
 
 function playAudio(vol, audio) {
-    // Clone audio so overlapping placements can play simultaneously
     const sound = audio.cloneNode();
-    sound.volume = vol || 0.03; // full volume for clarity
+    sound.volume = vol || 0.03;
     sound.play();
 }
 
@@ -148,14 +147,14 @@ overlay.addEventListener("click", () => {
 });
 
 startbtn.addEventListener("click", () => {
-    playAudio(0.05, placeSound);
+    playAudio(0.07, placeSound);
 });
 
 
 
 function showTurnIndicator() {
     turnIndicator.style.display = "flex";
-    turnPlayer.textContent = `${playerNames[currentPlayer]}`;
+    turnPlayer.textContent = `${playerNames[currentPlayer]}'s turn`;
     currentDie.innerHTML = diceFaces[rolledValue - 1];
     for (let i = 0; i < 2; i++) {
         boardEls[i].classList.remove('active', 'dimmed');
@@ -192,7 +191,7 @@ function handleCellClick(boardIndex, cellIndex) {
             cell.classList.add("occupied");
             cell.classList.add("drop");
             setTimeout(() => {
-                playAudio(0.05, placeSound);
+                playAudio(0.07, placeSound);
                 cell.classList.remove("drop")
                 endTurnBtn.style.display = "block";
             }, 600);

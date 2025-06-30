@@ -18,7 +18,7 @@ This project recreates the gameplay experience of Knucklebones in a web browser,
 
 ### 🚀 Live Demo
 
-Coming soon!
+[Knucklebones Dice Game](https://knucklebones-dicegame.web.app)
 
 ### 📦 Installation
 

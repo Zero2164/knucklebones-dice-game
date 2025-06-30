@@ -1,577 +1,677 @@
-    * {
-        font-family: "VT323", monospace;
-        font-weight: 400;
-        font-style: normal;
+/* ==========================================================================
+   Knucklebones Dice Game CSS
+   --------------------------------------------------------------------------
+   Style Guide Reference
+
+   Fonts:
+     - "VT323", monospace (main UI)
+     - 'Press Start 2P', cursive (titles, winner, loading)
+     - 'Georgia', serif (dice cells)
+
+   Colors:
+     - Main Gold:        #ccb87cf4
+     - Board Brown 1:    #65411d
+     - Board Brown 2:    #5b3819
+     - Board Brown 3:    #4b2e14
+     - Cell Brown 1:     #442a12
+     - Cell Brown 2:     #211509
+     - Cell Border:      #1e0f04
+     - Overlay BG:       rgba(0, 0, 0, 0.471)
+     - Footer BG:        rgba(20, 20, 20, 0.8)
+     - Footer Text:      #ccc
+     - Candle Light:     rgba(255, 180, 80, 0.4)
+     - Loading BG:       #000
+     - Winner Gold:      gold
+
+   Shadows:
+     - Box:              0 5px 10px rgba(0, 0, 0, 1)
+     - Board:            0 0 20px rgba(0, 0, 0, 0.6)
+     - Inset:            0 0 30px rgba(0, 0, 0, 0.7)
+
+   Border Radius:
+     - Board:            6px
+     - Cell:             4px
+     - Button:           10px
+     - Footer:           8px
+
+   ========================================================================== */
+
+
+/* ========== Base Styles ========== */
+
+/* Universal font and reset */
+* {
+    font-family: "VT323", monospace;
+    font-weight: 400;
+    font-style: normal;
+}
+
+html,
+body {
+    background: linear-gradient(135deg, #2a2119, #0c0702);
+}
+
+/* Body background and layout */
+body {
+    height: 100vh;
+    user-select: none;
+}
+
+/* Main container for color and overflow */
+.main-container {
+    box-sizing: border-box;
+    overflow: hidden;
+    color: #ccb87cf4;
+}
+
+/* ========== Typography ========== */
+
+/* Overlay and winner fonts */
+.overlay-content,
+.footer {
+    font-family: "VT323", monospace;
+}
+
+.overlay-content {
+    background: linear-gradient(135deg, #2a2119, #0c0702);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem 3rem;
+    border-radius: 10px;
+    text-align: center;
+    color: #ccb87cf4;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.overlay-content p {
+    font-size: 20px;
+}
+
+.overlay-content h1 {
+    font-size: 30px;
+}
+
+/* Winner display */
+#winnerName,
+#winnerWord {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2em;
+    color: gold;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.5rem;
+    gap: 6px;
+    letter-spacing: -1px;
+}
+
+#winnerWord {
+    font-size: 1.6em;
+}
+
+#winnerName span,
+#winnerWord span {
+    display: inline-block;
+    animation: dance 0.6s ease-in-out infinite;
+    margin: 0;
+    padding: 0;
+}
+
+/* ========== Controls & Buttons ========== */
+
+/* Top controls bar */
+.controls {
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    height: 50px;
+    z-index: 1000;
+}
+
+/* Main button style */
+.Btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 140px;
+    height: 40px;
+    border: none;
+    padding: 0px 20px;
+    background-color: #ccb87cf4;
+    color: white;
+    font-weight: 500;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 5px 5px 0px #61573bf4;
+    transition-duration: .3s;
+}
+
+.Btn:hover {
+    color: transparent;
+}
+
+.Btn:hover svg {
+    color: white;
+    right: 43%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    transition-duration: .3s;
+}
+
+.Btn:active {
+    transform: translate(3px, 3px);
+    transition-duration: .3s;
+    box-shadow: 2px 2px 0px #61573bf4;
+}
+
+.overlay-content button {
+    margin-top: 1rem;
+}
+
+/* End turn button (hidden by default) */
+.endturnbtn-container {
+    position: relative;
+    height: 40px;
+}
+
+.endTurnBtn {
+    display: none;
+}
+
+
+/* SVG icons for buttons */
+.svg {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+    fill: white;
+    transition-duration: .3s;
+}
+
+
+.svg-replay {
+    width: 20px;
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+    fill: none;
+    stroke: white;
+    transition-duration: .3s;
+}
+
+/* ========== Input Fields ========== */
+
+input {
+    padding: 10px;
+    margin: 10px;
+    font-size: 1em;
+    border-radius: 8px;
+    border: none;
+    width: 200px;
+    text-align: center;
+}
+
+/* ========== Board & Cell Layout ========== */
+
+/* Board container and layout */
+#boards {
+    position: relative;
+    display: none;
+    padding-top: 1rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.board-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1.5rem;
+    gap: 20px;
+}
+
+/* Board grid styling */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 80px);
+    grid-template-rows: repeat(3, 80px);
+    gap: 5px;
+    padding: 20px;
+    background: repeating-linear-gradient(45deg,
+            #65411d,
+            #5b3819 10px,
+            #65411d 10px,
+            #4b2e14 20px);
+    border: 4px solid #2b1805;
+    border-radius: 6px;
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 0, 0, 0.6);
+    transform: perspective(800px) rotateX(5deg);
+}
+
+/* Board cell styling */
+.cell {
+    position: relative;
+    background: repeating-linear-gradient(45deg,
+            #442a12,
+            #211509 10px,
+            #442a12 10px,
+            #211509 20px);
+    border: 2px solid #1e0f04;
+    border-radius: 4px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+    color: #443e35;
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+    line-height: 80px;
+    user-select: none;
+    transition: transform 0.3s, box-shadow 0.3s;
+    z-index: 1;
+}
+
+.cell.occupied {
+    background: repeating-linear-gradient(45deg,
+            #65411d,
+            #5b3819 10px,
+            #65411d 10px,
+            #4b2e14 20px);
+    cursor: not-allowed;
+    z-index: 2;
+}
+
+.cell.occupied svg {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s;
+    fill: #ccb87cf4;
+}
+
+.cell::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* ========== Game State & Overlay ========== */
+
+/* Overlay for modals and start screen */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.471);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 10;
+    overflow: hidden;
+}
+
+.startScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: 'Press Start 2P', cursive;
+    overflow: hidden;
+    background: linear-gradient(135deg, #2a2119, #0c0702);
+}
+
+/* Candle light effect for start screen */
+#candleLight {
+    position: absolute;
+    top: -40%;
+    left: -40%;
+    width: 200%;
+    height: 200%;
+    pointer-events: none;
+    background: radial-gradient(circle at 0% 0%, rgba(255, 180, 80, 0.4) 0%, transparent 60%);
+    transform-origin: top left;
+    animation: candleFlicker 2s infinite;
+}
+
+/* Hide overlays when not needed */
+#overlay.hidden,
+#startScreen.hidden {
+    display: none;
+}
+
+/* ========== Dice & Turn Indicators ========== */
+
+/* Dice display */
+#die {
+    font-size: 5em;
+    margin: 20px;
+}
+
+#die svg {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s;
+}
+
+/* Die face styling */
+.die-face {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.die-face>svg {
+    width: 24px;
+    height: 24px;
+    fill: #ccb87cf4;
+    transition: transform 0.3s;
+}
+
+/* Roll and turn text */
+.roll-text,
+.turn-text {
+    font-size: 1.4em;
+    margin: 10px;
+}
+
+/* Turn indicator */
+#turnIndicator {
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 10px 15px;
+    border-radius: 8px;
+    display: none;
+    align-content: center;
+    justify-content: center;
+    gap: 5px;
+    border: 2px solid #ccb87cf4;
+    font-size: 18px;
+}
+
+/* ========== Animations ========== */
+
+/* Animation for cell pop, fall, drop */
+.pop {
+    animation: popAnim 0.4s ease;
+}
+
+.fall {
+    animation: fallAnim 0.5s ease;
+}
+
+.drop {
+    animation: dropAnim 0.5s ease;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 1);
+}
+
+/* Loading screen and animation */
+#loadingScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    color: #fff;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.5em;
+}
+
+.loading-text {
+    animation: pulse 1.5s infinite alternate;
+}
+
+/* Dimmed and active states for UI elements */
+.dimmed {
+    opacity: 0.6;
+    filter: grayscale(50%);
+    pointer-events: none;
+}
+
+.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Hero label for players */
+.hero {
+    background: transparent;
+    padding: 10px 15px;
+    margin: 10px;
+    border: 2px solid #ccb87cf4;
+    border-radius: 5px;
+    min-width: 50px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ccb87cf4;
+}
+
+/* ========== Footer ========== */
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background-color: transparent;
+    color: #656565;
+    text-align: center;
+    font-family: "VT323", monospace;
+    text-decoration: none;
+}
+
+.footer a {
+    color: #ccb87cf4;
+    text-decoration: none;
+}
+
+
+/* ========== Keyframes ========== */
+
+@keyframes dance {
+
+    0%,
+    100% {
+        transform: translateY(0);
     }
 
-    body {
+    50% {
+        transform: translateY(-2px);
+    }
+}
 
-        background: linear-gradient(135deg, #2a2119, #0c0702);
-        height: 100vh;
-        user-select: none;
-        overflow: hidden;
+@keyframes pulse {
+    0% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes candleFlicker {
+
+    0%,
+    100% {
+        transform: scale(1) translate(0, 0);
+        opacity: 1;
+    }
+
+    25% {
+        transform: scale(1.02) translate(-1%, -1%);
+        opacity: 0.95;
+    }
+
+    50% {
+        transform: scale(0.98) translate(1%, 1%);
+        opacity: 0.85;
+    }
+
+    75% {
+        transform: scale(1.01) translate(-0.5%, 0.5%);
+        opacity: 0.9;
+    }
+}
+
+@keyframes roll {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes popAnim {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.4) rotate(15deg) translateY(-5px);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes fallAnim {
+    from {
+        transform: translateY(-60px);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes dropAnim {
+    from {
+        transform: translateY(-40px) scale(1.3);
+        box-shadow: 16px 37px 5px 0px rgba(0, 0, 0, 0.75);
+        -webkit-box-shadow: 16px 37px 5px 0px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 16px 37px 5px 0px rgba(0, 0, 0, 0.75);
+    }
+
+    to {
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+
+/* ========== Responsive Board Scaling ========== */
+
+/* Default (desktop/laptop) - already set at 80px cells */
+
+/* Tablet (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .board {
+        grid-template-columns: repeat(3, 64px);
+        grid-template-rows: repeat(3, 64px);
+        padding: 14px;
+    }
+
+    .cell {
+        font-size: 20px;
+        line-height: 64px;
+    }
+}
+
+/* Large mobile/portrait tablets (max-width: 768px) */
+@media (max-width: 768px) {
+    .board {
+        grid-template-columns: repeat(3, 68px);
+        grid-template-rows: repeat(3, 68px);
+        padding: 10px;
+    }
+
+    .cell {
+        font-size: 16px;
+        line-height: 48px;
+    }
+
+    .board-container {
+        margin: 0.5rem;
+        gap: 10px;
+    }
+}
+
+/* Small mobile (max-width: 480px) */
+@media (max-width: 480px) {
+    .board {
+        grid-template-columns: repeat(3, 52px);
+        grid-template-rows: repeat(3, 52px);
+        padding: 6px;
+    }
+
+    .cell {
+        font-size: 12px;
+        line-height: 32px;
     }
 
     .main-container {
-        box-sizing: border-box;
-        overflow: hidden;
-        color: #ccb87cf4;
+        padding: 0 2px;
     }
 
-    .controls {
-        position: relative;
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: flex-start;
-        align-items: center;
-        height: 50px;
-        z-index: 1000;
+    .board-container {
+        margin: 0.2rem;
+        gap: 4px;
     }
+}
 
-    .overlay-content {
-        background: linear-gradient(135deg, #2a2119, #0c0702);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 1rem 2rem 3rem;
-        border-radius: 10px;
-        text-align: center;
-        color: #ccb87cf4;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-
+/* Adjust overlay and winner text for mobile */
+@media (max-width: 480px) {
+    .overlay-content h1 {
+        font-size: 26px;
     }
 
     .overlay-content p {
         font-size: 20px;
     }
 
-    .overlay-content h1 {
-        font-size: 30px;
-    }
-
-
-
-    .hero {
-        background: transparent;
-        padding: 10px 15px;
-        margin: 5px;
-        border: 2px solid #ccb87cf4;
-        border-radius: 5px;
-        min-width: 50px;
-        text-align: center;
-        font-size: 1.2em;
-        font-weight: bold;
-        color: #ccb87cf4;
-    }
-
-
-
-    #boards {
-        position: relative;
-        display: none;
-        padding-top: 1rem;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 40px;
-        overflow: hidden;
-    }
-
-    .board-container {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        margin: 1.5rem;
-    }
-
-
-
-
-    .dimmed {
-        opacity: 0.6;
-        filter: grayscale(50%);
-        pointer-events: none;
-    }
-
-    .active {
-        opacity: 1;
-        pointer-events: auto;
-    }
-
-
-
-    .cell.occupied {
-        background: repeating-linear-gradient(45deg,
-                #65411d,
-                #5b3819 10px,
-                #65411d 10px,
-                #4b2e14 20px);
-        cursor: not-allowed;
-        z-index: 2;
-    }
-
-
-    .board {
-        display: grid;
-        grid-template-columns: repeat(3, 80px);
-        grid-template-rows: repeat(3, 80px);
-        gap: 5px;
-        padding: 20px;
-        background: repeating-linear-gradient(45deg,
-                #65411d,
-                #5b3819 10px,
-                #65411d 10px,
-                #4b2e14 20px);
-
-        border: 4px solid #2b1805;
-        border-radius: 6px;
-        box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 0, 0, 0.6);
-        transform: perspective(800px) rotateX(5deg);
-
-    }
-
-    .cell {
-        position: relative;
-        background: repeating-linear-gradient(45deg,
-                #442a12,
-                #211509 10px,
-                #442a12 10px,
-                #211509 20px);
-        border: 2px solid #1e0f04;
-        border-radius: 4px;
-        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
-        color: #443e35;
-        font-family: 'Georgia', serif;
-        font-weight: bold;
-        font-size: 24px;
-        text-align: center;
-        line-height: 80px;
-        user-select: none;
-        transition: transform 0.3s, box-shadow 0.3s;
-        z-index: 1;
-    }
-
-    .cell.occupied svg {
-        width: 100%;
-        height: 100%;
-        transition: transform 0.3s;
-        fill: #ccb87cf4;
-    }
-
-    .cell::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        opacity: 0.5;
-        pointer-events: none;
-    }
-
-
-
-    #overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.471);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        z-index: 10;
-        overflow: hidden;
-    }
-
-
-    .startScreen {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 100;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        font-family: 'Press Start 2P', cursive;
-        overflow: hidden;
-        background: linear-gradient(135deg, #2a2119, #0c0702);
-        /* fallback for when animation isn't active */
-    }
-
-    #candleLight {
-        position: absolute;
-        top: -40%;
-        /* simulate candle above and to the left of viewport */
-        left: -40%;
-        width: 200%;
-        height: 200%;
-        pointer-events: none;
-        background: radial-gradient(circle at 0% 0%, rgba(255, 180, 80, 0.4) 0%, transparent 60%);
-        transform-origin: top left;
-        animation: candleFlicker 2s infinite;
-    }
-
-    #overlay.hidden,
-    #startScreen.hidden {
-        display: none;
-    }
-
-    #die {
-        font-size: 5em;
-        margin: 20px;
-    }
-
-    #die svg {
-        width: 100%;
-        height: 100%;
-        transition: transform 0.3s;
-    }
-
-    .roll-text,
-    .turn-text {
-        font-size: 1.4em;
-        margin: 10px;
-    }
-
-
-
-    .Btn {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        width: 130px;
-        height: 40px;
-        border: none;
-        padding: 0px 20px;
-        background-color: #ccb87cf4;
-        color: white;
-        font-weight: 500;
-        font-size: 15px;
-        cursor: pointer;
-        border-radius: 10px;
-        box-shadow: 5px 5px 0px #61573bf4;
-        transition-duration: .3s;
-    }
-
-    .endturnbtn {
-        display: none;
-        position: absolute;
-        margin: 5px;
-        top: 47%;
-        right: 50%;
-    }
-
-    .svg {
-        width: 20px;
-        position: absolute;
-        right: 0;
-        margin-right: 20px;
-        fill: white;
-        transition-duration: .3s;
-    }
-
-    /* .endturnbtn .svg {
-        width: 20px;
-        height: 20px;
-    } */
-
-    .svg-replay {
-        width: 20px;
-        position: absolute;
-        right: 0;
-        margin-right: 20px;
-        fill: none;
-        stroke: white;
-        transition-duration: .3s;
-    }
-
-    .Btn:hover {
-        color: transparent;
-    }
-
-    .Btn:hover svg {
-        color: white;
-    }
-
-    .Btn:hover svg {
-        right: 43%;
-        margin: 0;
-        padding: 0;
-        border: none;
-        transition-duration: .3s;
-    }
-
-    .Btn:active {
-        transform: translate(3px, 3px);
-        transition-duration: .3s;
-        box-shadow: 2px 2px 0px #61573bf4;
-    }
-
-    .overlay-content button {
-        margin-top: 1rem;
-    }
-
-
-    #turnIndicator {
-        position: absolute;
-        top: 0%;
-        right: 0%;
-        background: rgba(0, 0, 0, 0.8);
-        padding: 10px 15px;
-        border-radius: 8px;
-        display: none;
-        align-content: center;
-        justify-content: center;
-        gap: 5px;
-        border: 2px solid #ccb87cf4;
-        font-size: 24px;
-    }
-
-    .die-face {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .die-face>svg {
-        width: 24px;
-        height: 24px;
-        fill: #ccb87cf4;
-        transition: transform 0.3s;
-    }
-
-    .pop {
-        animation: popAnim 0.4s ease;
-    }
-
-    .fall {
-        animation: fallAnim 0.5s ease;
-    }
-
-    .drop {
-        animation: dropAnim 0.5s ease;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 1);
-    }
-
-
-    input {
-        padding: 10px;
-        margin: 10px;
-        font-size: 1em;
-        border-radius: 8px;
-        border: none;
-        width: 200px;
-        text-align: center;
-    }
-
-
-    #loadingScreen {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #000;
-        /* dark background */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        /* highest priority */
-        color: #fff;
-        font-family: 'Press Start 2P', cursive;
-        font-size: 1.5em;
-    }
-
-    .loading-text {
-        animation: pulse 1.5s infinite alternate;
-    }
-
     #winnerName,
     #winnerWord {
-        font-family: 'Press Start 2P', cursive;
-        font-size: 2em;
-        color: gold;
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 0.5rem;
-        gap: 6px;
-        letter-spacing: -1px;
+        font-size: 1.1em;
+        gap: 2px;
     }
 
     #winnerWord {
-        font-size: 1.6em;
-        /* optional: make "Wins!" a bit smaller */
+        font-size: 1em;
     }
-
-    #winnerName span,
-    #winnerWord span {
-        display: inline-block;
-        animation: dance 0.6s ease-in-out infinite;
-        margin: 0;
-        padding: 0;
-    }
-
-    @keyframes dance {
-
-        0%,
-        100% {
-            transform: translateY(0);
-        }
-
-        50% {
-            transform: translateY(-2px);
-        }
-    }
-
-    @keyframes pulse {
-        0% {
-            opacity: 0.5;
-        }
-
-        100% {
-            opacity: 1;
-        }
-    }
-
-
-
-    @keyframes candleFlicker {
-
-        0%,
-        100% {
-            transform: scale(1) translate(0, 0);
-            opacity: 1;
-        }
-
-        25% {
-            transform: scale(1.02) translate(-1%, -1%);
-            opacity: 0.95;
-        }
-
-        50% {
-            transform: scale(0.98) translate(1%, 1%);
-            opacity: 0.85;
-        }
-
-        75% {
-            transform: scale(1.01) translate(-0.5%, 0.5%);
-            opacity: 0.9;
-        }
-    }
-
-
-    @keyframes roll {
-        0% {
-            transform: rotate(0deg);
-        }
-
-        100% {
-            transform: rotate(-360deg);
-        }
-    }
-
-    @keyframes popAnim {
-        0% {
-            transform: scale(1);
-        }
-
-        50% {
-            transform: scale(1.4) rotate(15deg) translateY(-5px);
-        }
-
-        100% {
-            transform: scale(1);
-        }
-    }
-
-    @keyframes fallAnim {
-        from {
-            transform: translateY(-60px);
-        }
-
-        to {
-            transform: translateY(0);
-        }
-    }
-
-    @keyframes dropAnim {
-        from {
-            transform: translateY(-40px) scale(1.3);
-            box-shadow: 16px 37px 5px 0px rgba(0, 0, 0, 0.75);
-            -webkit-box-shadow: 16px 37px 5px 0px rgba(0, 0, 0, 0.75);
-            -moz-box-shadow: 16px 37px 5px 0px rgba(0, 0, 0, 0.75);
-        }
-
-        to {
-            transform: translateY(0) scale(1);
-        }
-    }
-
-
-
-    /* Small portrait phones: e.g., iPhone SE, small Androids */
-    @media (max-width: 400px) and (orientation: portrait) {
-        .board {
-            transform: scale(0.85);
-        }
-    }
-
-    /* Standard portrait phones: e.g., iPhone 12–15, Pixel 7 */
-    @media (min-width: 401px) and (max-width: 600px) and (orientation: portrait) {
-        .board {
-            transform: scale(1);
-        }
-    }
-
-    /* Large portrait phones or portrait tablets: e.g., iPhone Plus, iPad Mini in portrait */
-    @media (min-width: 601px) and (max-width: 900px) and (orientation: portrait) {
-        .board {
-            transform: scale(1.1);
-        }
-    }
-
-    /* Large portrait tablets: e.g., iPad Air/Pro 11" portrait */
-    @media (min-width: 901px) and (orientation: portrait) {
-        .board {
-            transform: scale(1.2);
-        }
-    }
-
-    /* Small landscape phones: very tight horizontal space */
-    @media (max-height: 400px) and (orientation: landscape) {
-        .board {
-            transform: scale(0.6);
-        }
-    }
-
-    /* Standard landscape phones & small tablets: e.g., Galaxy Fold landscape, iPhone landscape */
-    @media (min-height: 401px) and (max-height: 600px) and (orientation: landscape) {
-        .board {
-            transform: scale(0.75);
-        }
-    }
-
-    /* Large landscape phones/tablets: iPad Mini/Air landscape */
-    @media (min-height: 601px) and (max-height: 900px) and (orientation: landscape) {
-        .board {
-            transform: scale(0.9);
-        }
-    }
-
-    /* Large landscape tablets / ultrawide monitors: iPad Pro landscape or desktop ultrawide */
-    @media (min-height: 901px) and (orientation: landscape) {
-        .board {
-            transform: scale(1);
-        }
-    }
+}
