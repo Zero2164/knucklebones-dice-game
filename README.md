@@ -9,12 +9,14 @@ This project recreates the gameplay experience of Knucklebones in a web browser,
 
 > **Disclaimer:** This is a fan-made, open-source project and is not affiliated with Massive Monster, Devolver Digital, or Cult of the Lamb.
 
-### 🎮 Gameplay
-
+### How to play
+The game is faithful to the rules of the original mini game. 
 - Two players take turns rolling a die and placing it on their 3×3 board.
 - Matching dice in the same column multiply their total value.
-- Placing a die with the same number in the same column on your opponent’s board knocks out matching dice.
+- Placing a die with the same number in the same column as what's on your opponent’s board knocks out matching dice.
 - The game ends when one board is full; the player with the highest score wins.
+
+Rules from the official game can be found here: https://cult-of-the-lamb.fandom.com/wiki/Knucklebones
 
 ### 🚀 Live Demo
 
