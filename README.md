@@ -16,8 +16,6 @@ The game is faithful to the rules of the original mini game.
 - Placing a die with the same number in the same column as what's on your opponent’s board knocks out matching dice.
 - The game ends when one board is full; the player with the highest score wins.
 
-Rules from the official game can be found here: https://cult-of-the-lamb.fandom.com/wiki/Knucklebones
-
 ### 🚀 Live Demo
 
 [Knucklebones Dice Game](https://knucklebones-dicegame.web.app)
