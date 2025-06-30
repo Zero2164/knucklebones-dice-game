@@ -278,10 +278,12 @@ function updateScores() {
 
     for (let p = 0; p < 2; p++) {
         let total = 0;
+
         for (let col = 0; col < 3; col++) {
             let counts = {};
             let positions = {};
 
+            // Collect values in the current column
             for (let row = 0; row < 3; row++) {
                 let idx = row * 3 + col;
                 let val = boards[p][idx];
@@ -295,16 +297,16 @@ function updateScores() {
             for (let v in counts) {
                 let count = counts[v];
                 let numV = parseInt(v);
-                if (count === 1) {
-                    total += numV;
-                } else if (numV === 1) {
-                    // Special case: 1s increase linearly with the number of 1s
-                    total += count;
-                } else {
-                    total += Math.pow(numV, count);
-                }
 
-                if (count > 1) {
+                if (count === 1) {
+                    // Single die: just add the value
+                    total += numV;
+                } else {
+                    // Sum all dice of the same value, then multiply by count
+                    let sum = numV * count;
+                    total += sum * count;
+
+                    // Add glow for matching dice
                     positions[v].forEach(idx => {
                         const cell = boardEls[p].children[idx];
                         cell.classList.add("glow");
@@ -312,8 +314,10 @@ function updateScores() {
                 }
             }
         }
+
         scores[p] = total;
     }
+
     updateHeroes();
 }
 

@@ -1,76 +1,61 @@
-🎲 Knuckles
+### 🦴 Knucklebones (Web Adaptation)
 
-Knuckles is a 2-player web game inspired by a classic grid dice battle. It’s fully playable in any modern browser on desktop, tablet, or mobile. The game features turn-based dice placement, matching mechanics for score multipliers, and knockout rules for competitive play.
+Knucklebones is a web-based adaptation of the dice game featured in Cult of the Lamb, originally developed by Massive Monster and published by Devolver Digital. This project recreates the rules and mechanics of Knucklebones in a browser-friendly format, designed to be responsive and playable on desktop, mobile, and tablet devices.
 
-📜 Game Rules
+    ⚠️ This project is a fan-made, open-source reimplementation for educational and entertainment purposes only. All rights to Cult of the Lamb, including the Knucklebones minigame concept, belong to Massive Monster and Devolver Digital.
 
-    Each player has a 3×3 grid.
+### 🎮 About Knucklebones
 
-    Players take turns rolling a 6-sided die and placing the die in one of the lowest available slots of any of the three columns on their own grid.
+Knucklebones is a fast-paced competitive dice placement game played on two 3×3 grids. Players take turns rolling dice and placing them strategically to score points and sabotage their opponent. Key mechanics include:
 
-    Dice drop from the top of the column, similar to Connect Four.
+✅ Matching dice: Placing multiple of the same number in a column multiplies the value.
+✅ Knockout: Placing a die matching your opponent’s in the same column destroys their dice of that value.
+✅ Race to fill the board: The first player to fill all nine slots ends the game; the player with the highest score wins.
+💻 Features
 
-    The score for each player is the sum of their dice, but:
+    📱 Fully responsive design for desktop, mobile, and tablet.
 
-        If there are two dice of the same value in the same column, they multiply together (e.g., two 5s → 5×5=25).
+    🎲 Animated dice rolling and placement.
 
-        If there are three dice of the same value in the same column, they multiply three times (e.g., three 3s → 3×3×3=27).
+    ⚔️ Knockout logic faithful to the original game rules.
 
-        If the dice value is 1, it scores linearly instead: one 1=1, two 1s=2, three 1s=3.
+    💥 Multiplication scoring based on matching dice in columns.
 
-    Knockout mechanic: if you place a die with the same value in the same column as your opponent's die, you knock it out, removing the opponent's die from that column.
+    🔊 Optional sound effects.
 
-    Knocked-out dice fall upwards, filling the empty spot below them.
+    ✨ Animated winner text.
 
-    Once a player’s grid is full (all 9 spots filled), the game ends and the player with the highest score wins.
+    📝 Built entirely in HTML, CSS, and vanilla JavaScript.
 
-✨ Features
-
-✅ 2D responsive design that scales to mobile, tablet, and desktop
-✅ Animated dice rolling, die placement, knockouts, and falling dice
-✅ Player name input with validation to avoid duplicates
-✅ Dynamic scoring with highlight animations for matched dice
-✅ Retro-inspired pixel font support via Google Fonts
-✅ Start and end screens with game results
-📦 Project Structure
-
-/index.html
-/styles.css
-/script.js
-/assets/        # (optional for dice images, sounds, etc.)
-/README.md
-
-🛠️ How to Play Locally
+### 🚀 Getting Started
 
     Clone the repository:
 
-    git clone https://github.com/yourusername/knuckles.git
-    cd knuckles
+    git clone https://github.com/yourusername/knucklebones-web.git
+    cd knucklebones-web
 
     Open index.html in your browser.
 
-    Enter unique player names on the start screen.
+That’s it — no build tools or dependencies needed!
 
-    Play turns by rolling and placing dice until a player’s board fills up.
+### 🛠️ Controls & How to Play
 
-    The game will display the winner on the end screen.
+    Enter player names on the start screen.
 
-🧮 Game Logic Overview
+    Players take turns clicking to roll the dice.
 
-    Dice Placement: The die is placed into the lowest empty row of the chosen column.
+    Place the rolled die into an available slot in your grid.
 
-    Score Calculation: After every turn, scores are recalculated by iterating each column for each player, counting same-value dice:
+    Knock out your opponent’s dice by matching their die value in the same column.
 
-        If a single die exists → added as-is.
+    The first player to fill their grid ends the game; the highest score wins.
 
-        If two matching dice → multiply once (e.g., 3×3).
+### ❤️ Credits & Disclaimer
 
-        If three matching dice → multiply twice (e.g., 3×3×3).
+Knucklebones is inspired by the dice game of the same name featured in Cult of the Lamb. All original designs, concepts, and mechanics belong to Massive Monster and Devolver Digital.
 
-        Special case for 1s: they add linearly by their count (1, 2, or 3).
+This project is a fan-made, open-source adaptation under the MIT license. It is not affiliated with or endorsed by Massive Monster or Devolver Digital.
 
-    Knockout Logic: When placing a die, the opponent’s same-value dice in the same column are removed, and higher dice fall down to fill gaps.
+### 📜 License
 
-📄 License
-
-This game is open-source and available under the MIT License.
+This web adaptation is released under the MIT License.
