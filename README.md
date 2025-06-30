@@ -49,5 +49,5 @@ This project is open-sourced under the MIT License. See the LICENSE file for det
 ### 📚 Assets & Credits
 
 - [VT323 Font](https://fonts.googleapis.com/css2?family=VT323&display=swap) by Google Fonts
-- [Dice Favicon](https://www.flaticon.com/free-icons/dice) created by Freepik on Flaticon
+- [Dice Favicon](https://www.flaticon.com/authors/bearicons) created by bearicons on [Flaticon](https://www.flaticon.com/)
 - [Game Background Music and Effects](https://pixabay.com/users/freesound_community-46691455/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=17221) created by [freesound_community - Pixabay](https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=17221)
