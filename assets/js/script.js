@@ -16,9 +16,9 @@ const currentDie = document.getElementById("currentDie");
 const endTurnBtn = document.getElementById("endTurnBtn");
 const startScreen = document.getElementById("startScreen");
 const startbtn = document.getElementById("startGame");
-const startMenuAudio = new Audio("assets/audio/startscreen.mp3");
-startMenuAudio.loop = true;
-startMenuAudio.volume = 0.1;
+const backgroundAudio = new Audio("assets/audio/background.mp3");
+backgroundAudio.loop = true;
+backgroundAudio.volume = 0.02;
 const placeSound = new Audio("assets/audio/click.mp3");
 const rollSound = new Audio("assets/audio/dice.mp3");
 const knockoutSound = new Audio("assets/audio/knockout.mp3");
@@ -66,7 +66,7 @@ for (let p = 0; p < 2; p++) {
 function playAudio(vol, audio) {
     // Clone audio so overlapping placements can play simultaneously
     const sound = audio.cloneNode();
-    sound.volume = vol || 0.2; // full volume for clarity
+    sound.volume = vol || 0.03; // full volume for clarity
     sound.play();
 }
 
@@ -110,7 +110,7 @@ function startGame() {
     playerNames[1] = p2;
     startScreen.classList.add("hidden");
     document.getElementById("boards").style.display = "flex";
-    fadeOutAndStop(startMenuAudio, 1500);
+    // fadeOutAndStop(backgroundAudio, 1500);
     updateHeroes();
     startTurn();
 }
@@ -148,7 +148,7 @@ overlay.addEventListener("click", () => {
 });
 
 startbtn.addEventListener("click", () => {
-    playAudio(1, placeSound);
+    playAudio(0.05, placeSound);
 });
 
 
@@ -192,7 +192,7 @@ function handleCellClick(boardIndex, cellIndex) {
             cell.classList.add("occupied");
             cell.classList.add("drop");
             setTimeout(() => {
-                playAudio(0.5, placeSound);
+                playAudio(0.05, placeSound);
                 cell.classList.remove("drop")
                 endTurnBtn.style.display = "block";
             }, 600);
@@ -240,7 +240,7 @@ function applyKnockout() {
             oppBoard[rIdx] = null;
             cell.innerHTML = "";
             cell.classList.remove('occupied', 'pop');
-            playAudio(0.5, knockoutSound);
+            playAudio(0.05, knockoutSound);
             // Apply gravity: fall dice above into empty space
             for (let r = rIdx - 3; r >= 0; r -= 3) {
                 if (oppBoard[r] !== null) {
@@ -383,7 +383,7 @@ window.addEventListener("load", () => {
 
     }, 500); // match the fade duration
 
-    startMenuAudio.play().catch(e => {
+    backgroundAudio.play().catch(e => {
         console.log("Audio playback prevented by browser until user interaction:", e);
     });
 });

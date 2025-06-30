@@ -1,61 +1,53 @@
-### 🦴 Knucklebones (Web Adaptation)
+# 🎲 Knucklebones (Web Adaptation)
 
-Knucklebones is a web-based adaptation of the dice game featured in [Cult of the Lamb](https://cult-of-the-lamb.fandom.com/wiki/Knucklebones), originally developed by Massive Monster and published by Devolver Digital. This project recreates the rules and mechanics of Knucklebones in a browser-friendly format, designed to be responsive and playable on desktop, mobile, and tablet devices.
+A web-based open-source adaptation of the "Knucklebones" minigame featured in the video game **Cult of the Lamb**, originally developed by Massive Monster and published by Devolver Digital.
 
-> _This project is a fan-made, open-source reimplementation for educational and entertainment purposes only. All rights to Cult of the Lamb, including the Knucklebones minigame concept, belong to Massive Monster and Devolver Digital._
+This project recreates the gameplay experience of Knucklebones in a web browser, supporting desktop, tablet, and mobile devices. Players can face off in a turn-based dice game where strategic placement, multipliers, and knockouts determine the victor.
 
-### 🎮 About Knucklebones
+🔗 Learn more about the original game here:  
+[Knucklebones on Cult of the Lamb Wiki](https://cult-of-the-lamb.fandom.com/wiki/Knucklebones)
 
-Knucklebones is a fast-paced competitive dice placement game played on two 3×3 grids. Players take turns rolling dice and placing them strategically to score points and sabotage their opponent. Key mechanics include:
+> **Disclaimer:** This is a fan-made, open-source project and is not affiliated with Massive Monster, Devolver Digital, or Cult of the Lamb.
 
-✅ Matching dice: Placing multiple of the same number in a column multiplies the value.
-✅ Knockout: Placing a die matching your opponent’s in the same column destroys their dice of that value.
-✅ Race to fill the board: The first player to fill all nine slots ends the game; the player with the highest score wins.
-💻 Features
+### 🎮 Gameplay
 
-    📱 Fully responsive design for desktop, mobile, and tablet.
+- Two players take turns rolling a die and placing it on their 3×3 board.
+- Matching dice in the same column multiply their total value.
+- Placing a die with the same number in the same column on your opponent’s board knocks out matching dice.
+- The game ends when one board is full; the player with the highest score wins.
 
-    🎲 Animated dice rolling and placement.
+### 🚀 Live Demo
 
-    ⚔️ Knockout logic faithful to the original game rules.
+Coming soon!
 
-    💥 Multiplication scoring based on matching dice in columns.
+### 📦 Installation
 
-    🔊 Optional sound effects.
+1. Clone this repository:
+    ```bash
+        git clone https://github.com/yourusername/knucklebones.git
+        cd knucklebones
+    ```
+2. Open index.html in your browser, or serve with your preferred local server.
 
-    ✨ Animated winner text.
+### 🛠 Technologies
 
-    📝 Built entirely in HTML, CSS, and vanilla JavaScript.
+- HTML, CSS, JavaScript (no frameworks)
+- Firebase Hosting (optional for deployment)
 
-### 🚀 Getting Started
+🤝 Contributing
 
-    Clone the repository:
+Contributions are welcome and encouraged! Whether you want to fix a bug, improve the gameplay experience, suggest new features, or help with documentation, your input is greatly appreciated.
 
-    git clone https://github.com/yourusername/knucklebones-web.git
-    cd knucklebones-web
+To get started, please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
-    Open index.html in your browser.
 
-That’s it — no build tools or dependencies needed!
+### 📄 License
 
-### 🛠️ Controls & How to Play
+This project is open-sourced under the MIT License. See the LICENSE file for details.
 
-    Enter player names on the start screen.
 
-    Players take turns clicking to roll the dice.
+### 📚 Assets & Credits
 
-    Place the rolled die into an available slot in your grid.
-
-    Knock out your opponent’s dice by matching their die value in the same column.
-
-    The first player to fill their grid ends the game; the highest score wins.
-
-### ❤️ Credits & Disclaimer
-
-Knucklebones is inspired by the dice game of the same name featured in Cult of the Lamb. All original designs, concepts, and mechanics belong to Massive Monster and Devolver Digital.
-
-This project is a fan-made, open-source adaptation under the MIT license. It is not affiliated with or endorsed by Massive Monster or Devolver Digital.
-
-### 📜 License
-
-This web adaptation is released under the [MIT License](LICENSE).
+- [VT323 Font](https://fonts.googleapis.com/css2?family=VT323&display=swap) by Google Fonts
+- [Dice Favicon](https://www.flaticon.com/free-icons/dice) created by Freepik on Flaticon
+- [Game Background Music and Effects](https://pixabay.com/users/freesound_community-46691455/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=17221) created by [freesound_community - Pixabay](https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=17221)
