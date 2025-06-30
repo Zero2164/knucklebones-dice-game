@@ -1,8 +1,8 @@
 ### 🦴 Knucklebones (Web Adaptation)
 
-Knucklebones is a web-based adaptation of the dice game featured in Cult of the Lamb, originally developed by Massive Monster and published by Devolver Digital. This project recreates the rules and mechanics of Knucklebones in a browser-friendly format, designed to be responsive and playable on desktop, mobile, and tablet devices.
+Knucklebones is a web-based adaptation of the dice game featured in [Cult of the Lamb](https://cult-of-the-lamb.fandom.com/wiki/Knucklebones), originally developed by Massive Monster and published by Devolver Digital. This project recreates the rules and mechanics of Knucklebones in a browser-friendly format, designed to be responsive and playable on desktop, mobile, and tablet devices.
 
-    ⚠️ This project is a fan-made, open-source reimplementation for educational and entertainment purposes only. All rights to Cult of the Lamb, including the Knucklebones minigame concept, belong to Massive Monster and Devolver Digital.
+> _This project is a fan-made, open-source reimplementation for educational and entertainment purposes only. All rights to Cult of the Lamb, including the Knucklebones minigame concept, belong to Massive Monster and Devolver Digital._
 
 ### 🎮 About Knucklebones
 
@@ -58,4 +58,4 @@ This project is a fan-made, open-source adaptation under the MIT license. It is 
 
 ### 📜 License
 
-This web adaptation is released under the MIT License.
+This web adaptation is released under the [MIT License](LICENSE).
