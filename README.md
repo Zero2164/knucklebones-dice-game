@@ -1,4 +1,4 @@
-# 🎲 Knucklebones (Web Adaptation)
+# 🎲 Knucklebones Dice Game (Web Adaptation)
 
 A web-based open-source adaptation of the "Knucklebones" minigame featured in the video game **Cult of the Lamb**, originally developed by Massive Monster and published by Devolver Digital.
 
@@ -22,11 +22,7 @@ This project recreates the gameplay experience of Knucklebones in a web browser,
 
 ### 📦 Installation
 
-1. Clone this repository:
-    ```bash
-        git clone https://github.com/yourusername/knucklebones.git
-        cd knucklebones
-    ```
+1. Clone this repository
 2. Open index.html in your browser, or serve with your preferred local server.
 
 ### 🛠 Technologies
