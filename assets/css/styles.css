@@ -126,7 +126,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    height: 80px;
+    height: 90px;
     width: 100%;
     z-index: 101;
 }
@@ -374,6 +374,8 @@ input {
     position: absolute;
     bottom: 0%;
     right: 0%;
+    margin-top: 20px;
+    margin-right: 10px;
     background: rgba(0, 0, 0, 0.8);
     padding: 5px 10px;
     border-radius: 8px;
@@ -435,6 +437,8 @@ input {
     right: 0%;
     background: rgba(0, 0, 0, 0.8);
     padding: 5px 10px;
+    margin-top: 10px;
+    margin-right: 10px;
     border-radius: 8px;
     display: none;
     align-content: center;
