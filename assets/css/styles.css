@@ -233,7 +233,7 @@ input {
 #boards {
     position: relative;
     display: none;
-    margin-top: 60px;
+    margin-top: 84px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
