@@ -4,9 +4,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Knucklebones Game</title>
-  <link rel="icon" type="image/png" href="assets/images/favicon.ico">
+  <title>Knucklebones Dice Game</title>
+  <!-- Standard favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png" />
+  <!-- Apple touch icon -->
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+  <!-- Android Chrome icons -->
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/android-chrome-192x192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/icons/android-chrome-512x512.png" />
+  <!-- Web App Manifest -->
+  <link rel="manifest" href="site.webmanifest" />
+  <!-- Stylesheet -->
   <link rel="stylesheet" href="assets/css/styles.css" />
+  <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
@@ -22,26 +34,32 @@
         <div id="turnPlayer"></div>
         <div class="die-face" id="currentDie"></div>
       </div>
-
-
+      <div id="rules">
+        <a href="https://github.com/Zero2164/knucklebones-dice-game" target="_blank" class="rules-link">Rules</a>
+      </div>
     </div>
     <div id="startScreen" class="startScreen">
       <div id="candleLight"></div>
       <h1>Knucklebones</h1>
       <input type="text" id="p1Name" placeholder="Player 1 name" />
       <input type="text" id="p2Name" placeholder="Player 2 name" />
-      <button class="Btn" id="startGame" onclick="startGame()">Start Game <svg fill="currentColor" class="svg"
+      <button class="btn" id="startGame" onclick="startGame()">Start Game <svg fill="currentColor" class="svg"
           width="15" height="15" viewBox="0 0 0.6 0.6" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M.464.225.222.087a.086.086 0 0 0-.128.075V.44a.086.086 0 0 0 .085.085.1.1 0 0 0 .043-.012L.464.375a.086.086 0 0 0 0-.148ZM.439.33.197.471a.04.04 0 0 1-.035 0A.04.04 0 0 1 .144.44V.161A.04.04 0 0 1 .162.13L.179.125A.04.04 0 0 1 .197.13l.242.14a.035.035 0 0 1 0 .061Z" />
         </svg></button>
-      <footer class="footer">
-        v.0.1.1
+      <div class="startMenufooter">
+        v.0.1.2
         <br>
-        Open Source Knucklebones Dice Game by Kyle Lamont
+        Open Source Knucklebones Dice Game by <a class="githubRef" href="https://github.com/Zero2164"
+          target="_blank"><svg fill="currentColor" width="16" height="16" viewBox="0 0 0.48 0.48"
+            xmlns="http://www.w3.org/2000/svg" data-name="Layer 1">
+            <path
+              d="M.24.045a.2.2 0 0 0-.063.39C.187.437.191.431.191.426V.389C.141.398.128.377.124.365a.1.1 0 0 0-.02-.028C.097.333.087.324.104.324a.04.04 0 0 1 .031.02.043.043 0 0 0 .058.017.04.04 0 0 1 .013-.027C.161.329.115.312.115.235a.08.08 0 0 1 .02-.054.07.07 0 0 1 .002-.053s.017-.005.055.02a.2.2 0 0 1 .1 0C.33.122.347.128.347.128a.07.07 0 0 1 .002.053.08.08 0 0 1 .02.054c0 .077-.047.094-.091.099a.05.05 0 0 1 .013.037v.055c0 .005.004.011.014.009A.2.2 0 0 0 .24.045" />
+          </svg> Zero2164</a>
         <br>
         Inspired by <a href="https://cult-of-the-lamb.fandom.com/wiki/Knucklebones" target="_blank">Cult of the Lamb</a>
-      </footer>
+      </div>
     </div>
     <div id="boards">
       <div class="board-container">
@@ -49,7 +67,7 @@
         <div class="board" id="board1"></div>
       </div>
       <div class="endturnbtn-container">
-        <button class="Btn endTurnBtn" id="endTurnBtn">End Turn <svg class="svg" width="15" height="15"
+        <button class="btn endTurnBtn" id="endTurnBtn">End Turn <svg class="svg" width="15" height="15"
             viewBox="0 0 0.6 0.6" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd"
               d="M.125.194A.05.05 0 0 1 .201.151l.176.106a.05.05 0 0 1 0 .086L.201.449A.05.05 0 0 1 .125.406zM.351.3.175.194v.212zM.45.15a.025.025 0 0 1 .025.025v.25a.025.025 0 1 1-.05 0v-.25A.025.025 0 0 1 .45.15" />

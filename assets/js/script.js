@@ -11,6 +11,7 @@ const dieEl = document.getElementById("die");
 const turnInfo = document.getElementById("turnInfo");
 const rollPrompt = document.getElementById("rollPrompt");
 const turnIndicator = document.getElementById("turnIndicator");
+const rulesIndicator = document.getElementById("rules");
 const turnPlayer = document.getElementById("turnPlayer");
 const currentDie = document.getElementById("currentDie");
 const endTurnBtn = document.getElementById("endTurnBtn");
@@ -124,6 +125,7 @@ function startTurn() {
     rollPrompt.style.display = "block";
     dieEl.style.display = "block";
     turnIndicator.style.display = "none";
+    rulesIndicator.style.display = "none";
 }
 
 overlay.addEventListener("click", () => {
@@ -154,6 +156,7 @@ startbtn.addEventListener("click", () => {
 
 function showTurnIndicator() {
     turnIndicator.style.display = "flex";
+    rulesIndicator.style.display = "flex";
     turnPlayer.textContent = `${playerNames[currentPlayer]}'s turn`;
     currentDie.innerHTML = diceFaces[rolledValue - 1];
     for (let i = 0; i < 2; i++) {
@@ -208,6 +211,7 @@ endTurnBtn.addEventListener("click", () => {
     updateScores();
     if (isBoardFull(boards[currentPlayer])) {
         updateScores();
+        endTurnBtn.classList.add("finishGameBtn");
         endTurnBtn.textContent = "Finish Game";
         endTurnBtn.onclick = showEndScreen;
     } else {
@@ -352,11 +356,14 @@ function showEndScreen() {
     overlay.innerHTML = `
     <div class="overlay-content">
         <h1>Game Over!</h1>
-        <p>${playerNames[0]}: ${scores[0]}</p>
-        <p>${playerNames[1]}: ${scores[1]}</p>
+        <p>
+            ${playerNames[0]}: ${scores[0]}
+            <br>
+            ${playerNames[1]}: ${scores[1]}
+        </p>
         <div id="winnerName"></div>
         <div id="winnerWord"></div>
-        <button class="Btn" onclick="window.location.reload()">
+        <button class="btn" onclick="window.location.reload()">
             Play Again
             <svg class="svg-replay" width="20" height="20" viewBox="0 0 0.6 0.6" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M.125.325A.175.175 0 1 0 .3.15H.175m0 0L.25.075M.175.15.25.225" stroke="currentColor" stroke-width=".05" stroke-linecap="round" stroke-linejoin="round"/>
