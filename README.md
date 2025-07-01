@@ -70,7 +70,7 @@ This project is a free, open-source web adaptation of the Knucklebones dice game
 
 This section is intended for developers or technical users who want to run Knucklebones locally. If you just want to play, visit the <a href="https://knucklebones-dicegame.web.app">live game</a> or for rules see <a href="#how-to-play">How to Play</a>.
 
-##### Local Development Installation
+#### Local Development Installation
 * Open the [index.html](index.html) file from a modern browser (Chrome, Firefox, Safari, Edge)  browser by cloning the repo and accessing the files
 ```bash
 git clone https://github.com/Zero2164/knucklebones-dice-game.git
@@ -82,11 +82,11 @@ cd knucklebones-dice-game
 
 ## How to Play
 
-#### Prerequisites
+### Prerequisites
 
 * A modern browser (Chrome, Firefox, Safari, Edge).
 
-#### Rules
+### Rules
 
 The game is faithful to the [rules of the original Knucklebones mini game.](https://cult-of-the-lamb.fandom.com/wiki/Knucklebones) 
 
