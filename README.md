@@ -25,12 +25,18 @@
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a href="#for-developers-and-local-setup">For Developers & Local Setup</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#local-development-installation">Local Development Install</a></li>
       </ul>
     </li>
-    <li><a href="#how-to-play">How to Play</a></li>
+    <li>
+      <a href="#how-to-play">How to Play</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#rules">Game Rules</a></li>
+      </ul>
+    </li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -60,27 +66,30 @@ This project is a free, open-source web adaptation of the Knucklebones dice game
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Getting Started
+## For Developers and Local Setup
 
-To run Knucklebones locally, clone the repository and open `index.html` in your browser.
+This section is intended for developers or technical users who want to run Knucklebones locally. If you just want to play, visit the <a href="https://knucklebones-dicegame.web.app">live game</a> or for rules see <a href="#how-to-play">How to Play</a>.
 
-### Prerequisites
-
-* A modern browser (Chrome, Firefox, Safari, Edge).
-
-
-### Local Development Installation
-
+##### Local Development Installation
+* Open the [index.html](index.html) file from a modern browser (Chrome, Firefox, Safari, Edge)  browser by cloning the repo and accessing the files
 ```bash
 git clone https://github.com/Zero2164/knucklebones-dice-game.git
 cd knucklebones-dice-game
 ```
-Then open index.html.
+
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## How to Play
 
+#### Prerequisites
+
+* A modern browser (Chrome, Firefox, Safari, Edge).
+
+#### Rules
+
 The game is faithful to the [rules of the original Knucklebones mini game.](https://cult-of-the-lamb.fandom.com/wiki/Knucklebones) 
+
 - Two players take turns rolling a die and placing it on their 3×3 board.
 - Matching dice in the same column multiply their total value.
 - Placing a die with the same number in the same column as what's on your opponent’s board knocks out matching dice.
