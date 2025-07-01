@@ -1,4 +1,4 @@
-# Contributing to Knucklebones
+# Contributing to Knucklebones [WIP]
 
 Thank you for your interest in contributing to Knucklebones! I welcome improvements, bug fixes, new features, and other contributions.
 
