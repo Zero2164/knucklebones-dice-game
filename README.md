@@ -42,6 +42,7 @@
 ## About The Project
 
 [<img src="assets/images/board_screenshot.png">](https://knucklebones-dicegame.web.app)
+
 This project is a free, open-source web adaptation of the Knucklebones dice game featured in [*Cult of the Lamb*](https://cult-of-the-lamb.fandom.com/wiki/Knucklebones). It runs entirely in the browser on desktop and mobile, offering a faithful fan recreation of the original mini-game’s mechanics, but features a new user interface and original game board designs I created.
 
 🔗 Learn more about the original Knucklebones game here:  
