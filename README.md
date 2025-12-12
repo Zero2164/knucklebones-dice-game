@@ -3,7 +3,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Zero2164/knucklebones-dice-game">
-    <img src="assets/icons/android-chrome-512x512.png" alt="Knucklebones Logo" width="80" height="80">
+    <img src="assets/icons/web-app-manifest-512x512.png" alt="Knucklebones Logo" width="80" height="80">
   </a>
 
 <h3 align="center">Knucklebones</h3>
@@ -11,7 +11,7 @@
   <p align="center">
     A browser-based fan-made adaptation of the Knucklebones dice game from Cult of the Lamb.
     <br />
-    <a href="https://knucklebones-dicegame.web.app">View Demo</a>
+    <a href="https://knucklebones-dicegame.web.app">Play Game</a>
   </p>
 </div>
 
@@ -47,7 +47,7 @@
 
 ## About The Project
 
-[<img src="assets/images/board_screenshot.png">](https://knucklebones-dicegame.web.app)
+[<img src="assets/images/board-example.png">](https://knucklebones-dicegame.web.app)
 
 This project is a free, open-source web adaptation of the Knucklebones dice game featured in [*Cult of the Lamb*](https://cult-of-the-lamb.fandom.com/wiki/Knucklebones). It runs entirely in the browser on desktop and mobile, offering a faithful fan recreation of the original mini-game’s mechanics, but features a new user interface and original game board designs I created.
 
@@ -84,16 +84,63 @@ cd knucklebones-dice-game
 
 ### Prerequisites
 
-* A modern browser (Chrome, Firefox, Safari, Edge).
+* A mobile or desktop browser (Chrome, Firefox, Safari, Edge).
 
 ### Rules
 
-The game is faithful to the [rules of the original Knucklebones mini game.](https://cult-of-the-lamb.fandom.com/wiki/Knucklebones) 
+The game is faithful to the OG rules of the [Knucklebones mini game .](https://cult-of-the-lamb.fandom.com/wiki/Knucklebones) 
 
-- Two players take turns rolling a die and placing it on their 3×3 board.
-- Matching dice in the same column multiply their total value.
-- Placing a die with the same number in the same column as what's on your opponent’s board knocks out matching dice.
-- The game ends when one board is full; the player with the highest score wins.
+#### Objective
+
+Outscore your opponent by strategically placing dice on your board while disrupting their board.
+
+#### Turns
+
+Players alternate turns. On your turn, you roll a single six-sided die, then place it in one of your three columns.
+After placing the die, select 'End Turn' to move to your opponent’s turn.
+
+#### Placing Dice
+
+You may place a die in any column that still has space.
+Each column holds up to three dice.
+Dice cannot be moved after the 'End Turn' button is pressed.
+
+#### Knockouts
+
+When you place a die, if your opponent has dice of the same value in the corresponding column, all matching dice in that column are destroyed.
+
+#### Scoring
+
+Each column scores independently. Matching dice in the same column multiply their value:
+
+- Single die: face value
+
+- Two matching dice: value × 2
+
+- Three matching dice: value × 3 × bonus multiplier
+
+Example:
+A column with 4, 4, 2 scores:
+
+- Two matching fours → 4 + 4 = 16
+
+- Single two → 2
+
+Which Totals: 18 points
+
+Summary:
+
+- Single die = value
+
+- Two matching dice = value × 2
+
+- Three matching dice = value × 3 × 2 (bonus multiplier)
+
+#### Win Condition
+
+The game ends when a player fills their board.
+The player with the highest score wins.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Roadmap 
@@ -129,8 +176,5 @@ Project Link: [https://github.com/Zero2164/knucklebones-dice-game](https://githu
 ## Acknowledgments
 
 * Inspired by [Cult of the Lamb](https://www.cultofthelamb.com/) by Massive Monster and Devolver Digital. This project is fan-made and not affiliated with or endorsed by them.
-* [VT323 Font](https://fonts.googleapis.com/css2?family=VT323&display=swap) by Google Fonts
-* [Dice Favicon](https://www.flaticon.com/authors/bearicons) by bearicons on [Flaticon](https://www.flaticon.com/)
-* [Game Background Music and Effects](https://pixabay.com/users/freesound_community-46691455/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=17221) by [freesound_community](https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=17221) on Pixabay
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

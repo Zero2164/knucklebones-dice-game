@@ -135,33 +135,40 @@ body {
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    width: 140px;
-    height: 40px;
+    justify-content: center;
+    flex-direction: row;
+    width: 150px;
     border: none;
-    padding: 0px 20px;
+    padding: 10px 20px;
     background-color: #ccb87cf4;
-    color: white;
+    color: rgba(0, 0, 0, 0.8);
     font-weight: 500;
-    font-size: 18px;
+    font-size: 1.4em;
     cursor: pointer;
     border-radius: 10px;
     box-shadow: 5px 5px 0px #61573bf4;
     transition-duration: .3s;
 }
 
-/* .btn:hover {
-    color: transparent;
-} */
+.btn#startGame {
+    margin-top: 1rem;
+}
 
-/* .btn:hover svg {
-    color: white;
-    right: 43%;
-    margin: 0;
-    padding: 0;
-    border: none;
-    transition-duration: .3s;
-} */
+.btn#closeRulesBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 60px;
+}
+
+.btn#rulesBtn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 50px;
+    margin-top: 20px;
+    margin-right: 10px;
+}
 
 .btn:active {
     transform: translate(3px, 3px);
@@ -196,21 +203,18 @@ body {
 .svg {
     width: 20px;
     height: 20px;
-    position: absolute;
-    right: 0;
-    margin-right: 20px;
-    fill: white;
+    fill: rgba(0, 0, 0, 0.8);
     transition-duration: .3s;
+    margin-left: 5px;
 }
 
 
 .svg-replay {
     width: 20px;
     position: absolute;
-    right: 0;
-    margin-right: 20px;
+    right: 10px;
     fill: none;
-    stroke: white;
+    stroke: rgba(0, 0, 0, 0.8);
     transition-duration: .3s;
 }
 
@@ -219,11 +223,18 @@ body {
 input {
     padding: 10px;
     margin: 10px;
-    font-size: 1em;
+    font-size: 1.4em;
     border-radius: 8px;
     border: none;
     width: 200px;
     text-align: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 2px solid #ccb87cf4;
+    color: #e0d8c0;
+}
+
+input:focus {
+    outline: 2px solid #ccb87cf4;
 }
 
 /* ========== Board & Cell Layout ========== */
@@ -232,7 +243,7 @@ input {
 #boards {
     position: relative;
     display: none;
-    margin-top: 84px;
+    margin-top: 4rem;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -243,7 +254,7 @@ input {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 1.5rem;
+    margin: 1rem;
     gap: 20px;
 }
 
@@ -287,13 +298,14 @@ input {
     z-index: 1;
 }
 
+
+
 .cell.occupied {
     background: repeating-linear-gradient(45deg,
             #65411d,
             #5b3819 10px,
             #65411d 10px,
             #4b2e14 20px);
-    cursor: not-allowed;
     z-index: 2;
 }
 
@@ -315,6 +327,12 @@ input {
     pointer-events: none;
 }
 
+/* highlight cell column on hover */
+.cell.highlight {
+    box-shadow: 0 0 15px #ccb87cf4;
+}
+
+
 /* ========== Game State & Overlay ========== */
 
 /* Overlay for modals and start screen */
@@ -324,7 +342,7 @@ input {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.471);
+    background: rgba(0, 0, 0, 0.68);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -369,28 +387,81 @@ input {
     display: none;
 }
 
-#rules {
+/* #rules {
     position: absolute;
-    bottom: 0%;
+    top: 0%;
     right: 0%;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-right: 10px;
-    background: rgba(0, 0, 0, 0.8);
-    padding: 5px 10px;
-    border-radius: 8px;
-    align-content: center;
-    justify-content: center;
-    gap: 5px;
-    border: 2px solid #ccb87cf4;
-    font-size: 18px;
-    color: #ccb87cf4;
+    font-size: 1.5em;
+} */
+
+/* an overlay for the rules to go in */
+#rulesOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.843);
+    z-index: 50;
+    display: none;
+    overflow-x: auto;
+    height: 100vh;
 }
 
-#rules a {
+.rules-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 10px;
+    border-radius: 5px;
+    text-align: center;
     color: #ccb87cf4;
-    text-decoration: none;
-    text-decoration: underline;
+    gap: 10px;
+    margin: 0.5rem;
+    position: relative;
+}
+
+.rule-card {
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid #ccb87cf4;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: left;
+    white-space: wrap;
+    word-break: break-word;
+}
+
+.rule-card h3,
+.rule-header-container h3 {
+    font-size: 1.5em;
     font-weight: bold;
+    text-decoration: underline;
+    margin-top: 0;
+}
+
+.rule-header-container h3 {
+    font-size: 2em;
+    margin-bottom: 0;
+    text-decoration: none;
+    font-weight: bolder;
+}
+
+.rule-header-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: row;
+    margin-bottom: 15px;
+}
+
+
+.rule-card p,
+.rule-card li {
+    margin-bottom: 0;
+    font-size: 1.4em;
 }
 
 
@@ -400,6 +471,7 @@ input {
 #die {
     font-size: 5em;
     margin: 20px;
+    transition: transform 0.3s;
 }
 
 #die svg {
@@ -407,6 +479,7 @@ input {
     height: 100%;
     transition: transform 0.3s;
 }
+
 
 /* Die face styling */
 .die-face {
@@ -416,35 +489,52 @@ input {
 }
 
 .die-face>svg {
-    width: 24px;
-    height: 24px;
+    width: 35px;
+    height: 35px;
     fill: #ccb87cf4;
     transition: transform 0.3s;
+    animation: dance 0.7s ease-in-out infinite;
 }
 
 /* Roll and turn text */
 .roll-text,
 .turn-text {
-    font-size: 1.4em;
+    font-size: 1.5em;
     margin: 10px;
+    animation: dance 0.6s ease-in-out infinite;
 }
 
 /* Turn indicator */
-#turnIndicator {
-    position: absolute;
-    top: 0%;
-    right: 0%;
-    background: rgba(0, 0, 0, 0.8);
-    padding: 5px 10px;
-    margin-top: 10px;
-    margin-right: 10px;
+.turn-indicator {
+    padding: 5px 5px;
+    margin: 0.5rem;
     border-radius: 8px;
     display: none;
-    align-content: center;
+    align-items: center;
     justify-content: center;
     gap: 5px;
-    border: 2px solid #ccb87cf4;
-    font-size: 18px;
+}
+
+.turn-player,
+.after-text {
+    color: #ccb87cf4;
+    font-weight: bold;
+    word-break: break-all;
+    font-size: 1.5em;
+}
+
+/* knockout text animation */
+.knockout-text {
+    position: absolute;
+    transform: rotate(-10deg);
+    top: 40%;
+    left: 40%;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 1.2em;
+    color: #f4eded;
+    text-shadow: 2px 2px 4px #000000;
+    animation: shrinkDie 0.5s forwards;
+    z-index: 101;
 }
 
 /* ========== Animations ========== */
@@ -496,18 +586,25 @@ input {
     pointer-events: auto;
 }
 
+/* .board.active {
+    border: none;
+    box-shadow: 0 0 15px #ccb87cf4;
+    transform: scale(1.05);
+} */
+
 /* Hero label for players */
 .hero {
-    background: transparent;
+    background: rgba(0, 0, 0, 0.8);
     padding: 10px 15px;
     margin: 10px;
     border: 2px solid #ccb87cf4;
-    border-radius: 5px;
+    border-radius: 8px;
     min-width: 50px;
     text-align: center;
-    font-size: 1.2em;
+    font-size: 1.3em;
     font-weight: bold;
     color: #ccb87cf4;
+    word-break: break-all;
 }
 
 /* ========== Footer ========== */
@@ -559,6 +656,19 @@ input {
 
     50% {
         transform: translateY(-2px);
+    }
+}
+
+@keyframes shrinkDie {
+    0% {
+        width: 100%;
+        height: 100%;
+
+    }
+
+    100% {
+        width: 0%;
+        height: 0%;
     }
 }
 
@@ -689,7 +799,6 @@ input {
     }
 
     .board-container {
-        margin: 0.5rem;
         gap: 10px;
     }
 }
@@ -712,7 +821,6 @@ input {
     }
 
     .board-container {
-        margin: 0.2rem;
         gap: 4px;
     }
 }
