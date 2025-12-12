@@ -28,6 +28,20 @@ const placeSound = new Audio("assets/audio/click.mp3");
 const rollSound = new Audio("assets/audio/dice.mp3");
 const knockoutSound = new Audio("assets/audio/knockout.mp3");
 
+// generate random start button text
+const startBtnTexts = [
+    "Battle",
+    "Ready Up",
+    "Launch",
+    "Begin",
+    "Rollout",
+    "Start",
+    "Let's Go",
+    "Kick Off",
+    "Fight!"
+];
+startGameTxt.textContent = startBtnTexts[Math.floor(Math.random() * startBtnTexts.length)];
+
 
 const diceFaces = [
     // 1 dot
@@ -444,19 +458,6 @@ for (let p = 0; p < 2; p++) {
     }
 }
 
-// generate random start button text
-const startBtnTexts = [
-    "Battle",
-    "Ready Up",
-    "Launch",
-    "Begin",
-    "Rollout",
-    "Start",
-    "Let's Go",
-    "Kick Off",
-    "Fight!"
-];
-startGameTxt.textContent = startBtnTexts[Math.floor(Math.random() * startBtnTexts.length)];
 
 
 // function to ensure that upon page reload, the current game state isn't lost
