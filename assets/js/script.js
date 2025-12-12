@@ -17,6 +17,7 @@ const afterText = document.querySelectorAll(".after-text");
 const endTurnBtn = document.getElementById("endTurnBtn");
 const startScreen = document.getElementById("startScreen");
 const startbtn = document.getElementById("startGame");
+const startGameTxt = document.getElementById("startGameTxt");
 const rulesBtn = document.getElementById("rulesBtn");
 const rulesOverlay = document.getElementById("rulesOverlay");
 
@@ -442,6 +443,20 @@ for (let p = 0; p < 2; p++) {
         boardEls[p].appendChild(cell);
     }
 }
+
+// generate random start button text
+const startBtnTexts = [
+    "Battle",
+    "Ready Up",
+    "Launch",
+    "Begin",
+    "Rollout",
+    "Start",
+    "Let's Go",
+    "Kick Off",
+    "Fight!"
+];
+startGameTxt.textContent = startBtnTexts[Math.floor(Math.random() * startBtnTexts.length)];
 
 
 // function to ensure that upon page reload, the current game state isn't lost

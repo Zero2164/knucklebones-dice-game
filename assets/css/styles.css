@@ -152,6 +152,10 @@ body {
 
 .btn#startGame {
     margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
 }
 
 .btn#closeRulesBtn {
